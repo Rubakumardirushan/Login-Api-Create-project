@@ -40,4 +40,5 @@ public function getinfo(){
     return response()->json($name,200);
 }
 
+
 }

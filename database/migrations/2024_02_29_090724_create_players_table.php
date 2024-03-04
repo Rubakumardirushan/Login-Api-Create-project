@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('Player_jersey_number');
             $table->integer('Player_points');
             $table->timestamps();
+            $table->engine = 'InnoDB';
         });
     }
 

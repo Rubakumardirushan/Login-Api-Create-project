@@ -11,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('matches', function (Blueprint $table) {
+        Schema::create('poinsts', function (Blueprint $table) {
             $table->id();
-            $table->string('TeamA');
-            $table->string('TeamB');
-            $table->timestamp('Match_start_time');
-            $table->timestamp('Match_end_time');
-            $table->timestamps();
+            $table->integer('Match_no');
+            $table->string('Team_name');
+            $table->integer('Points');
             $table->engine = 'InnoDB';
-            $table->integer('Match_no')->unique();
-
+            $table->integer('jersey_number');
+            $table->timestamps();
         });
     }
 
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('matches');
+        Schema::dropIfExists('poinsts');
     }
 };

@@ -13,7 +13,7 @@ class matchescontroller extends Controller
         $teamB = $request->input('TeamB');
         $match_start_time = $request->input('Match_start_time');
         $match_end_time = $request->input('Match_end_time');
-
+   $match_no = $request->input('Match_no');
         $current_time = now();
 
         if ($match_start_time < $current_time || $match_end_time < $current_time) {
@@ -27,9 +27,6 @@ class matchescontroller extends Controller
         $hours_difference = $interval->h;
 
 
-        if ($hours_difference < 3) {
-            return response()->json(['message' => 'The match duration must be at least 3 hours.'], 201);
-        }
 
 
 
@@ -68,6 +65,7 @@ if($teamA == $teamB){
         $match->teamB = $teamB;
         $match->match_start_time = $match_start_time;
         $match->match_end_time = $match_end_time;
+        $match->match_no = $match_no;
         $match->save();
 
         return response()->json(['message' => 'Match created successfully.'], 200);
@@ -76,6 +74,16 @@ if($teamA == $teamB){
 public function getmatches(){
     $matches = Matches::all();
     return response()->json($matches,200);
+
+}
+public function get_match_no($match_no){
+    $match = Matches::where('Match_no', $match_no)->get();
+    if ($match) {
+        return response()->json($match, 200);
+    } else {
+        return response()->json(['error' => 'Match not found'], 404);
+    }
+
 
 }
 }

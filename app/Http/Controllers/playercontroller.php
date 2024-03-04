@@ -41,7 +41,15 @@ public function getplayers(){
     $player = Players::all();
     return response()->json($player,200);}
 
+    public function getJersey($team_name) {
+        $players = Players::where('Player_team', $team_name)->get();
 
+        // Extract jersey numbers and format them as required
+        $jerseys = $players->pluck('Player_jersey_number')->map(function($jersey) {
+            return ['jersey' => $jersey];
+        });
 
+        return response()->json($jerseys, 200);
 
+}
 }
